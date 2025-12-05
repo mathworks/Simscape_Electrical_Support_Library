@@ -1,0 +1,47 @@
+component ideal_thyristor < foundation.electrical.branch
+% Ideal Thyristor
+
+% Copyright 2025 The MathWorks, Inc.
+
+inputs
+    g = { 0.0, '1' }; 
+end
+
+variables
+    x = {0.0,'1'};
+    y = {0.0,'1'};
+end
+
+parameters
+    Vf   = { 0.6, 'V' };      % Forward voltage
+    Ron  = { 0.3, 'Ohm' };    % On resistance
+    Goff = { 1e-8, '1/Ohm' }; % Off conductance
+end
+
+parameters (Access=private)
+    Rzc = {1, 'Ohm'};  % Resistance for zero-crossing detection
+end
+
+equations
+    assert(Vf>0)
+    assert(Ron>0)
+    assert(Goff>0)
+
+    y == g + x;
+
+    if (v + i*Rzc <= Vf + Vf*Goff*Rzc) && (y >= 1)
+
+        % On
+        v == i*Ron + Vf*(1-Ron*Goff);
+        x == 1;
+
+    else
+        
+        % Off
+        i == v*Goff;
+        x == 0;
+
+    end
+end
+
+end

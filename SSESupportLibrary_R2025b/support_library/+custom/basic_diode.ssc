@@ -1,0 +1,34 @@
+component basic_diode < foundation.electrical.branch
+% Basic Diode
+% Basic Diode with forward voltage set to zero.
+% Copyright 2005-2025 The MathWorks, Inc.
+
+parameters
+    Ron  = { 1e-3, 'Ohm' };    % On resistance
+    Goff = { 1e-6, '1/Ohm' }; % Off conductance
+end
+
+parameters (Access=private)
+    Rzc = {1, 'Ohm'};  % Resistance for zero-crossing detection
+end
+
+equations
+    assert(Ron>0)
+    assert(Goff>0)
+ 
+    if v + i*Rzc >= 0
+        % Switching condition chosen to provide good on to off and
+        % off to on characteristics
+
+        % On
+        v == i*Ron;
+
+    else
+
+        % Off
+        i == v*Goff;
+
+    end
+end
+
+end

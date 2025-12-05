@@ -1,0 +1,527 @@
+component general_mutual_inductor
+% Mutual Inductor with variable number of windings
+% This component models a mutual inductor with a variable number of windings.
+% The number of windings is specified by the parameter N.
+% The resistance matrix R and inductance matrix L must be specified accordingly.
+%   V = R*I + L*dI/dt 
+% Parameters:
+%   N      - Number of windings (1 to 12)
+%   length - Length of line (km)
+%   L      - Inductance matrix (H/km)
+%   R      - Resistance matrix (Ohm/km)
+%
+% Copyright 2025 The MathWorks, Inc.
+
+nodes
+    p1  = foundation.electrical.electrical;
+    p2  = foundation.electrical.electrical;
+    p3  = foundation.electrical.electrical;
+    p4  = foundation.electrical.electrical;
+    p5  = foundation.electrical.electrical;
+    p6  = foundation.electrical.electrical;
+    p7  = foundation.electrical.electrical;
+    p8  = foundation.electrical.electrical;
+    p9  = foundation.electrical.electrical;
+    p10 = foundation.electrical.electrical;
+    p11 = foundation.electrical.electrical;
+    p12 = foundation.electrical.electrical;
+    
+    n1  = foundation.electrical.electrical;
+    n2  = foundation.electrical.electrical;
+    n3  = foundation.electrical.electrical;
+    n4  = foundation.electrical.electrical;
+    n5  = foundation.electrical.electrical;
+    n6  = foundation.electrical.electrical;
+    n7  = foundation.electrical.electrical;
+    n8  = foundation.electrical.electrical;
+    n9  = foundation.electrical.electrical;
+    n10 = foundation.electrical.electrical;
+    n11 = foundation.electrical.electrical;
+    n12 = foundation.electrical.electrical;
+end
+
+
+%% parameter section
+parameters
+    N = Enum1to12.three;                             % Number of windings
+    length = {1, 'km'};
+    L = { [1 0.1 0.1;0.1 1 0.1;0.1 0.1 1], 'H/km' };    % Inductance matrix
+    R = { [1 0.1 0.1;0.1 1 0.1; 0.1 0.1 1], 'Ohm/km' }; % Resistance matrix
+end
+
+
+annotations
+    [p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12] : Side=Left;
+    [n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12] : Side=Right;
+end
+if N == 1
+    annotations
+        [p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12] : ExternalAccess=none;
+        [n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12] : ExternalAccess=none;
+    end
+
+elseif N == 2
+    annotations
+        [p3,p4,p5,p6,p7,p8,p9,p10,p11,p12] :ExternalAccess=none;
+        [n3,n4,n5,n6,n7,n8,n9,n10,n11,n12] :ExternalAccess=none;
+    end
+
+elseif N == 3
+    annotations
+        [p4,p5,p6,p7,p8,p9,p10,p11,p12] :ExternalAccess=none;
+        [n4,n5,n6,n7,n8,n9,n10,n11,n12] :ExternalAccess=none;
+    end
+
+elseif N == 4
+    annotations
+        [p5,p6,p7,p8,p9,p10,p11,p12] :ExternalAccess=none;
+        [n5,n6,n7,n8,n9,n10,n11,n12] :ExternalAccess=none;
+    end
+
+elseif N == 5
+    annotations
+        [p6,p7,p8,p9,p10,p11,p12] :ExternalAccess=none;
+        [n6,n7,n8,n9,n10,n11,n12] :ExternalAccess=none;
+    end
+
+elseif N == 6
+    annotations
+        [p7,p8,p9,p10,p11,p12] :ExternalAccess=none;
+        [n7,n8,n9,n10,n11,n12] :ExternalAccess=none;
+    end
+
+elseif N == 7
+    annotations
+        [p8,p9,p10,p11,p12] :ExternalAccess=none;
+        [n8,n9,n10,n11,n12] :ExternalAccess=none;
+    end
+
+elseif N == 8
+    annotations
+        [p9,p10,p11,p12] :ExternalAccess=none;
+        [n9,n10,n11,n12] :ExternalAccess=none;
+    end
+
+elseif N == 9
+    annotations
+        [p10,p11,p12] :ExternalAccess=none;
+        [n10,n11,n12] :ExternalAccess=none;
+    end
+
+elseif N == 10
+    annotations
+        [p11,p12] :ExternalAccess=none;
+        [n11,n12] :ExternalAccess=none;
+    end
+
+elseif N == 11
+    annotations
+        [p12] :ExternalAccess=none;
+        [n12] :ExternalAccess=none;
+    end
+
+end
+
+%% variables section
+variables (ExternalAccess=observe)  
+    V = {zeros(N,1),'V'};                                       % voltage array
+    I = {value = {zeros(N,1),'A'}, priority = priority.high};   % current array
+end
+
+%% branches section
+if N == 1
+    branches
+        I(1) : p1.i -> n1.i;
+    end
+    connections
+        connect(p2, *);
+        connect(n2, *);
+        connect(p3, *);
+        connect(n3, *);
+        connect(p4, *);
+        connect(n4, *);
+        connect(p5, *);
+        connect(n5, *);
+        connect(p6, *);
+        connect(n6, *);
+        connect(p7, *);
+        connect(n7, *);
+        connect(p8, *);
+        connect(n8, *);
+        connect(p9, *);
+        connect(n9, *);
+        connect(p10, *);
+        connect(n10, *);
+        connect(p11, *);
+        connect(n11, *);
+        connect(p12, *);
+        connect(n12, *);
+    end
+elseif N == 2
+    branches
+        I(1) : p1.i -> n1.i;
+        I(2) : p2.i -> n2.i;
+    end
+    connections
+        connect(p3, *);
+        connect(n3, *);
+        connect(p4, *);
+        connect(n4, *);
+        connect(p5, *);
+        connect(n5, *);
+        connect(p6, *);
+        connect(n6, *);
+        connect(p7, *);
+        connect(n7, *);
+        connect(p8, *);
+        connect(n8, *);
+        connect(p9, *);
+        connect(n9, *);
+        connect(p10, *);
+        connect(n10, *);
+        connect(p11, *);
+        connect(n11, *);
+        connect(p12, *);
+        connect(n12, *);
+    end
+elseif N == 3
+    branches
+        I(1) : p1.i -> n1.i;
+        I(2) : p2.i -> n2.i;
+        I(3) : p3.i -> n3.i;
+    end
+    connections
+        connect(p4, *);
+        connect(n4, *);
+        connect(p5, *);
+        connect(n5, *);
+        connect(p6, *);
+        connect(n6, *);
+        connect(p7, *);
+        connect(n7, *);
+        connect(p8, *);
+        connect(n8, *);
+        connect(p9, *);
+        connect(n9, *);
+        connect(p10, *);
+        connect(n10, *);
+        connect(p11, *);
+        connect(n11, *);
+        connect(p12, *);
+        connect(n12, *);
+    end
+elseif N == 4
+    branches
+        I(1) : p1.i -> n1.i;
+        I(2) : p2.i -> n2.i;
+        I(3) : p3.i -> n3.i;
+        I(4) : p4.i -> n4.i;
+    end
+    connections
+        connect(p5, *);
+        connect(n5, *);
+        connect(p6, *);
+        connect(n6, *);
+        connect(p7, *);
+        connect(n7, *);
+        connect(p8, *);
+        connect(n8, *);
+        connect(p9, *);
+        connect(n9, *);
+        connect(p10, *);
+        connect(n10, *);
+        connect(p11, *);
+        connect(n11, *);
+        connect(p12, *);
+        connect(n12, *);
+    end
+elseif N == 5
+    branches
+        I(1) : p1.i -> n1.i;
+        I(2) : p2.i -> n2.i;
+        I(3) : p3.i -> n3.i;
+        I(4) : p4.i -> n4.i;
+        I(5) : p5.i -> n5.i;
+    end
+    connections
+        connect(p6, *);
+        connect(n6, *);
+        connect(p7, *);
+        connect(n7, *);
+        connect(p8, *);
+        connect(n8, *);
+        connect(p9, *);
+        connect(n9, *);
+        connect(p10, *);
+        connect(n10, *);
+        connect(p11, *);
+        connect(n11, *);
+        connect(p12, *);
+        connect(n12, *);
+    end
+elseif N == 6
+    branches
+        I(1) : p1.i -> n1.i;
+        I(2) : p2.i -> n2.i;
+        I(3) : p3.i -> n3.i;
+        I(4) : p4.i -> n4.i;
+        I(5) : p5.i -> n5.i;
+        I(6) : p6.i -> n6.i;
+    end
+    connections
+        connect(p7, *);
+        connect(n7, *);
+        connect(p8, *);
+        connect(n8, *);
+        connect(p9, *);
+        connect(n9, *);
+        connect(p10, *);
+        connect(n10, *);
+        connect(p11, *);
+        connect(n11, *);
+        connect(p12, *);
+        connect(n12, *);
+    end
+elseif N == 7
+    branches
+        I(1) : p1.i -> n1.i;
+        I(2) : p2.i -> n2.i;
+        I(3) : p3.i -> n3.i;
+        I(4) : p4.i -> n4.i;
+        I(5) : p5.i -> n5.i;
+        I(6) : p6.i -> n6.i;
+        I(7) : p7.i -> n7.i;
+    end
+    connections
+        connect(p8, *);
+        connect(n8, *);
+        connect(p9, *);
+        connect(n9, *);
+        connect(p10, *);
+        connect(n10, *);
+        connect(p11, *);
+        connect(n11, *);
+        connect(p12, *);
+        connect(n12, *);
+    end
+elseif N == 8
+    branches
+        I(1) : p1.i -> n1.i;
+        I(2) : p2.i -> n2.i;
+        I(3) : p3.i -> n3.i;
+        I(4) : p4.i -> n4.i;
+        I(5) : p5.i -> n5.i;
+        I(6) : p6.i -> n6.i;
+        I(7) : p7.i -> n7.i;
+        I(8) : p8.i -> n8.i;
+    end
+    connections
+        connect(p9, *);
+        connect(n9, *);
+        connect(p10, *);
+        connect(n10, *);
+        connect(p11, *);
+        connect(n11, *);
+        connect(p12, *);
+        connect(n12, *);
+    end
+elseif N == 9
+    branches
+        I(1) : p1.i -> n1.i;
+        I(2) : p2.i -> n2.i;
+        I(3) : p3.i -> n3.i;
+        I(4) : p4.i -> n4.i;
+        I(5) : p5.i -> n5.i;
+        I(6) : p6.i -> n6.i;
+        I(7) : p7.i -> n7.i;
+        I(8) : p8.i -> n8.i;
+        I(9) : p9.i -> n9.i;
+    end
+    connections
+        connect(p10, *);
+        connect(n10, *);
+        connect(p11, *);
+        connect(n11, *);
+        connect(p12, *);
+        connect(n12, *);
+    end
+elseif N == 10
+    branches
+        I(1) : p1.i -> n1.i;
+        I(2) : p2.i -> n2.i;
+        I(3) : p3.i -> n3.i;
+        I(4) : p4.i -> n4.i;
+        I(5) : p5.i -> n5.i;
+        I(6) : p6.i -> n6.i;
+        I(7) : p7.i -> n7.i;
+        I(8) : p8.i -> n8.i;
+        I(9) : p9.i -> n9.i;
+        I(10) : p10.i -> n10.i;
+    end
+    connections
+        connect(p11, *);
+        connect(n11, *);
+        connect(p12, *);
+        connect(n12, *);
+    end
+elseif N == 11
+    branches
+        I(1) : p1.i -> n1.i;
+        I(2) : p2.i -> n2.i;
+        I(3) : p3.i -> n3.i;
+        I(4) : p4.i -> n4.i;
+        I(5) : p5.i -> n5.i;
+        I(6) : p6.i -> n6.i;
+        I(7) : p7.i -> n7.i;
+        I(8) : p8.i -> n8.i;
+        I(9) : p9.i -> n9.i;
+        I(10) : p10.i -> n10.i;
+        I(11) : p11.i -> n11.i;
+    end
+    connections
+        connect(p12, *);
+        connect(n12, *);
+    end
+elseif N == 12
+    branches
+        I(1) : p1.i -> n1.i;
+        I(2) : p2.i -> n2.i;
+        I(3) : p3.i -> n3.i;
+        I(4) : p4.i -> n4.i;
+        I(5) : p5.i -> n5.i;
+        I(6) : p6.i -> n6.i;
+        I(7) : p7.i -> n7.i;
+        I(8) : p8.i -> n8.i;
+        I(9) : p9.i -> n9.i;
+        I(10) : p10.i -> n10.i;
+        I(11) : p11.i -> n11.i;
+        I(12) : p12.i -> n12.i;
+    end
+    connections
+        % No additional connections needed as all branches are used
+    end
+end
+
+%% equations sections
+equations
+   
+    V(1:N) == length*L*I(1:N).der + length*R*I(1:N);
+    
+end
+
+if N == 1
+    equations
+        V(1) == p1.v - n1.v;
+    end
+elseif N == 2
+    equations
+        V(1) == p1.v - n1.v;
+        V(2) == p2.v - n2.v;
+    end
+elseif N == 3
+    equations
+        V(1) == p1.v - n1.v;
+        V(2) == p2.v - n2.v;
+        V(3) == p3.v - n3.v;
+    end
+elseif N == 4
+    equations
+        V(1) == p1.v - n1.v;
+        V(2) == p2.v - n2.v;
+        V(3) == p3.v - n3.v;
+        V(4) == p4.v - n4.v;
+    end
+elseif N == 5
+    equations
+        V(1) == p1.v - n1.v;
+        V(2) == p2.v - n2.v;
+        V(3) == p3.v - n3.v;
+        V(4) == p4.v - n4.v;
+        V(5) == p5.v - n5.v;
+    end
+elseif N == 6
+    equations
+        V(1) == p1.v - n1.v;
+        V(2) == p2.v - n2.v;
+        V(3) == p3.v - n3.v;
+        V(4) == p4.v - n4.v;
+        V(5) == p5.v - n5.v;
+        V(6) == p6.v - n6.v;
+    end
+elseif N == 7
+    equations
+        V(1) == p1.v - n1.v;
+        V(2) == p2.v - n2.v;
+        V(3) == p3.v - n3.v;
+        V(4) == p4.v - n4.v;
+        V(5) == p5.v - n5.v;
+        V(6) == p6.v - n6.v;
+        V(7) == p7.v - n7.v;
+    end
+elseif N == 8
+    equations
+        V(1) == p1.v - n1.v;
+        V(2) == p2.v - n2.v;
+        V(3) == p3.v - n3.v;
+        V(4) == p4.v - n4.v;
+        V(5) == p5.v - n5.v;
+        V(6) == p6.v - n6.v;
+        V(7) == p7.v - n7.v;
+        V(8) == p8.v - n8.v;
+    end
+elseif N == 9
+    equations
+        V(1) == p1.v - n1.v;
+        V(2) == p2.v - n2.v;
+        V(3) == p3.v - n3.v;
+        V(4) == p4.v - n4.v;
+        V(5) == p5.v - n5.v;
+        V(6) == p6.v - n6.v;
+        V(7) == p7.v - n7.v;
+        V(8) == p8.v - n8.v;
+        V(9) == p9.v - n9.v;
+    end
+elseif N == 10
+    equations
+        V(1) == p1.v - n1.v;
+        V(2) == p2.v - n2.v;
+        V(3) == p3.v - n3.v;
+        V(4) == p4.v - n4.v;
+        V(5) == p5.v - n5.v;
+        V(6) == p6.v - n6.v;
+        V(7) == p7.v - n7.v;
+        V(8) == p8.v - n8.v;
+        V(9) == p9.v - n9.v;
+        V(10) == p10.v - n10.v;
+    end
+elseif N == 11
+    equations
+        V(1) == p1.v - n1.v;
+        V(2) == p2.v - n2.v;
+        V(3) == p3.v - n3.v;
+        V(4) == p4.v - n4.v;
+        V(5) == p5.v - n5.v;
+        V(6) == p6.v - n6.v;
+        V(7) == p7.v - n7.v;
+        V(8) == p8.v - n8.v;
+        V(9) == p9.v - n9.v;
+        V(10) == p10.v - n10.v;
+        V(11) == p11.v - n11.v;
+    end
+elseif N == 12
+    equations
+        V(1) == p1.v - n1.v;
+        V(2) == p2.v - n2.v;
+        V(3) == p3.v - n3.v;
+        V(4) == p4.v - n4.v;
+        V(5) == p5.v - n5.v;
+        V(6) == p6.v - n6.v;
+        V(7) == p7.v - n7.v;
+        V(8) == p8.v - n8.v;
+        V(9) == p9.v - n9.v;
+        V(10) == p10.v - n10.v;
+        V(11) == p11.v - n11.v;
+        V(12) == p12.v - n12.v;
+    end
+end          
+end

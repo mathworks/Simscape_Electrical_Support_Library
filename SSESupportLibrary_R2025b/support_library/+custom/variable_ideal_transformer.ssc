@@ -1,0 +1,49 @@
+component variable_ideal_transformer
+% Variable Ideal Transformer
+% Models an ideal power-conserving transformer satisfying V_1 = N*V_2
+% and I_2 = N*I_1 where N is the Winding ratio, V_1 and V_2 are the
+% primary and secondary voltages, I_1 is the current flowing into the
+% primary + terminal, and I_2 is the current flowing out of the secondary
+% + terminal.
+%
+% This block can be used to represent either an AC transformer or a
+% solid-state DC to DC converter. To model a transformer with
+% inductance and mutual inductance terms, use the Mutual Inductor block.
+%
+% Note that the two electrical networks connected to the primary and
+% secondary windings must each have their own Electrical Reference block.
+
+% Copyright 2025 The MathWorks, Inc.
+
+nodes
+    p1 = foundation.electrical.electrical; % 1+:left
+    n1 = foundation.electrical.electrical; % 1-:left
+    p2 = foundation.electrical.electrical; % 2+:right
+    n2 = foundation.electrical.electrical; % 2-:right
+end
+
+inputs
+    n = { 1, '1' }; % R:left
+end
+
+variables
+    i1 = { 0, 'A' }; % Primary current
+    v1 = { 0, 'V' }; % Primary voltage
+    i2 = { 0, 'A' }; % Secondary current
+    v2 = { 0, 'V' }; % Secondary voltage
+end
+
+branches
+    i1 : p1.i -> n1.i;
+    i2 : p2.i -> n2.i;
+end
+
+equations
+    assert(n>0)
+    v1 == p1.v - n1.v;
+    v2 == p2.v - n2.v;
+    v2 == n*v1;
+    i1 == -n*i2;
+end
+
+end

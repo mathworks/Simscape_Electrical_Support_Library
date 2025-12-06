@@ -1,0 +1,33 @@
+component basic_switch < foundation.electrical.branch
+% Basic Switch
+% Basic linear switch with on resistance and off conductance
+%
+% Copyright 2005-2025 The MathWorks, Inc.
+
+inputs
+    vT = { 0.0, '1' }; %
+end
+
+parameters
+    Ron  = { 1e-3, 'Ohm' };    % On resistance
+    Goff = { 1e-6, '1/Ohm' }; % Off conductance
+end
+
+equations
+    assert(Ron>0)
+    assert(Goff>0)
+ 
+    if vT > 0.5
+
+        % On
+        v == i*Ron;
+
+    else
+
+        % Off
+        i == v*Goff;
+
+    end
+end
+
+end

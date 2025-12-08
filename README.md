@@ -4,7 +4,7 @@ Version 1.0
 
 ## Introduction
 
-The MathWorks Simscape Team has developed a support library for Simscape Electrical
+The MathWorks Simscape Electrical Team has developed a support library for Simscape Electrical
 that contains component assemblies and parameterization options more
 familiar to the power systems engineering community,
 in a readily accessible format, for use with Simscape Native Technology.

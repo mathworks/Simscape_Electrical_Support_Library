@@ -2,6 +2,8 @@
 
 Version 1.0
 
+[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=mathworks/Simscape_Electrical_Support_Library)
+
 ## Introduction
 
 The MathWorks Simscape Electrical Team has developed a support library for Simscape Electrical

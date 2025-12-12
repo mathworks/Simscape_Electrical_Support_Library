@@ -1,6 +1,6 @@
 # Simscape&trade; Electrical&trade; Support Library for Power Systems Engineers
 
-Version 1.0
+Version 1.0.1
 
 [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=mathworks/Simscape_Electrical_Support_Library)
 
@@ -53,6 +53,8 @@ directory and open a0_README.mlx for further instructions. MATPOWER is a MATLAB 
 
 examples/4.switch_fidelity contains a power electronic switch model fidelity example that describes 5 different
 model fidelities for a half-bridge topology. Open model_fidelity_considerations_for_switching_devices.mlx for more information.
+
+examples/5. visualize contains models and MATLAB scripts that visualize power system and power electronic operation. Each sub-directory has MATLAB live scripts that work through the examples.
 
 ## Tool Requirements
 

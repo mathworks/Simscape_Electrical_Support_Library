@@ -36,7 +36,7 @@ Each assembly has a parameter mask which exposes relevant parameters.
 Where applicable, there is also a check-box option to set all mask parameters
 as run-time, meaning the model will not recompile if any of the mask parameters change when using Fast Restart mode, or when the model is compiled as a MEX file.
 
-The support library comes with four sub-directories under examples. 
+The support library comes with five sub-directories under examples. 
 
 examples/1.component_tests contains test harnesses for a number of components within the 
 Support Library.

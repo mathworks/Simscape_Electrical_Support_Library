@@ -7,9 +7,7 @@ Version 1.0.1
 ## Introduction
 
 The MathWorks Simscape Electrical Team has developed a support library for Simscape Electrical
-that contains component assemblies and parameterization options more
-familiar to the power systems engineering community,
-in a readily accessible format, for use with Simscape Native Technology.
+that provides Power Systems Engineers with an entry point to Simscape native technology.
 The library also contains links to relevant Simscape Electrical shipping libraries
 for ease of navigation. For each assembled component, you can view the mask code for further detail on parameterizations and use of the Simulink API to interact with Simscape components. The Support Library comes with a number of examples that are described later in this document. The library organizes different component classifications
 as 8 sub-libraries, as shown below. 

@@ -1,0 +1,53 @@
+component mutual_resistor_3ph
+
+% Copyright 2025 The MathWorks, Inc.
+
+nodes
+    p1  = foundation.electrical.electrical;
+    p2  = foundation.electrical.electrical;
+    p3  = foundation.electrical.electrical;
+    
+    n1  = foundation.electrical.electrical;
+    n2  = foundation.electrical.electrical;
+    n3  = foundation.electrical.electrical;
+end
+
+
+%% parameter section
+parameters
+    R = { [1 0.1 0.1;0.1 1 0.1; 0.1 0.1 1], 'Ohm' }; % Resistance matrix
+end
+
+
+annotations
+    [p1,p2,p3] : Side=Left;
+    [n1,n2,n3] : Side=Right;
+end
+
+%% variables section
+variables (ExternalAccess=observe)  
+    V = {zeros(3,1),'V'};                                       % voltage array
+    I = {value = {zeros(3,1),'A'}, priority = priority.high};   % current array
+end
+
+%% branches section
+    branches
+        I(1) : p1.i -> n1.i;
+        I(2) : p2.i -> n2.i;
+        I(3) : p3.i -> n3.i;
+    end
+
+%% equations sections
+equations
+   
+    V == R*I;
+    
+end
+
+equations
+    V(1) == p1.v - n1.v;
+    V(2) == p2.v - n2.v;
+    V(3) == p3.v - n3.v;
+end
+          
+end

@@ -20,9 +20,13 @@ nt = numel(time);
 
 theta = squeeze(out.theta.Data);
 Vabc = squeeze(out.Vabc.Data)';
+Vclarke = out.Vclarke.Data;
 Van = Vabc(:,1);
 Vbn = Vabc(:,2);
 Vcn = Vabc(:,3);
+Valpha = Vclarke(:,1);
+Vbeta = Vclarke(:,2);
+
 
 %% 
 % We'll now use MATLAB Handle Graphics to build a visualization of three-phase 
@@ -66,12 +70,20 @@ thc = linspace(0,2*pi,100); % angle for circle
 plot(cos(thc),sin(thc),'k','LineWidth',0.3)
 
 co = 4; % offset for fixed reference frame
+co2 = 10; % offset for Clarke reference frame
 
 plot(cos(thc)+co,sin(thc),'k','LineWidth',0.3)
 plot([0 0]+co,[0 1],'k:','LineWidth',0.3)
+
+plot(cos(thc)+co2,sin(thc),'k','LineWidth',0.3)
+plot([0 0]+co2,[0 1],'k:','LineWidth',0.3)
+
 plot([0 sin(2*pi/3)]+co,[0 cos(2*pi/3)],'k:','LineWidth',0.3)
 plot([0 -sin(2*pi/3)]+co,[0 cos(2*pi/3)],'k:','LineWidth',0.3)
 plot([0 0]+co,[0 1],'k:','LineWidth',0.3)
+
+plot([0 sin(pi/2)]+co2,[0 cos(pi/2)],'k:','LineWidth',0.3)
+plot([0 0]+co2,[0 1],'k:','LineWidth',0.3)
 
 set(hva,'LineWidth',1,'Color','r','HeadStyle','hypocycloid')
 
@@ -92,6 +104,21 @@ hva1.Parent = ha;
 hva1.X = [0 0]+co;
 hva1.Y = [0 1];
 
+hs = annotation('arrow','Color','k','HeadStyle','hypocycloid','LineWidth',1);
+hs.Parent = ha;
+hs.X = [0 0];
+hs.Y = [0 1];
+
+hs1 = annotation('arrow','Color','k','HeadStyle','hypocycloid','LineWidth',1);
+hs1.Parent = ha;
+hs1.X = [0 0]+co;
+hs1.Y = [0 1];
+
+hs2 = annotation('arrow','Color','k','HeadStyle','hypocycloid','LineWidth',1);
+hs2.Parent = ha;
+hs2.X = [0 0]+co2;
+hs2.Y = [0 1];
+
 hvb1 = annotation('arrow','Color','g','HeadStyle','hypocycloid','LineWidth',1);
 hvb1.Parent = ha;
 hvb1.X = [0 sin(2*pi/3)]+co;
@@ -101,13 +128,26 @@ hvc1 = annotation('arrow','Color','b','HeadStyle','hypocycloid','LineWidth',1);
 hvc1.Parent = ha;
 hvc1.X = [0 sin(-2*pi/3)]+co;
 hvc1.Y = [0 cos(-2*pi/3)];
-axis([-5 8 -1.5 1.5],'equal')
+axis([-5 21 -1.5 1.5],'equal')
+
+hvalpha = annotation('arrow','Color',[192 0 0]/255,'HeadStyle','hypocycloid','LineWidth',1);
+hvalpha.Parent = ha;
+hvalpha.X = [0 0]+co2;
+hvalpha.Y = [0 1];
+
+hvbeta = annotation('arrow','Color',[0 75 135]/255,'HeadStyle','hypocycloid','LineWidth',1);
+hvbeta.Parent = ha;
+hvbeta.X = [0 sin(pi/2)]+co2;
+hvbeta.Y = [0 cos(pi/2)];
 
 al = 4.5; % axis length
 plot([-al 0],[0 0],'k:')
 plot([0 al*cosd(120)]+co,[0 -al*sind(120)],'k:')
 plot([0 al*cosd(-120)]+co,[0 -al*sind(-120)],'k:')
 plot([0 al*cosd(0)]+co,[0 -al*sind(0)],'k:')
+
+plot([0 al*cosd(0)]+co2,[0 -al*sind(0)],'k:')
+plot([0 al*cosd(90)]+co2,[0 -al*sind(90)],'k:')
 
 %%
 % We'll now add a time-series plot to the left of the vectors. Set up the x-axis 
@@ -119,7 +159,7 @@ time_window = 667;
 xaxis = linspace(-4.5,-1.5,time_window);
 
 hvat = plot(xaxis,Van(1:time_window),'r','LineWidth',1);
-axis([-5 8 -5 5],'equal')
+axis([-5 16 -5 5],'equal')
 
 % set up xaxis for fixed reference frame where we will rotate the
 % time-series plots
@@ -127,6 +167,7 @@ axis([-5 8 -5 5],'equal')
 xaxis1 = linspace(0,3,time_window);
 
 hvat1 = plot(xaxis1+co+1.2,Van(1:time_window),'r','LineWidth',1);
+hvalphat = plot(xaxis1+co2+1.3,Valpha(1:time_window),'Color',[192 0 0]/255,'LineWidth',1);
 
 % rotate the b- and c-axes time-series plots for fixed-frame
 
@@ -143,6 +184,17 @@ xyc = Rc * [xaxis1; Vcn(1:time_window)'];
 
 hvbt1 = plot(xyb(1,:)+co+1.2*cosd(-120), xyb(2,:)+1.2*sind(-120), 'g');
 hvct1 = plot(xyc(1,:)+co+1.2*cosd(120), xyc(2,:)-1.2*sind(-120), 'b');
+
+% rotate the beta axis
+
+thbeta = -90;                     
+Rbeta = [cosd(thbeta) -sind(thbeta);  
+     sind(thbeta)  cosd(thbeta)];
+
+xybeta = Rbeta * [xaxis1; Vbeta(1:time_window)']; 
+
+hvbetat = plot(xybeta(1,:)+co2+1.2*cosd(thbeta), xybeta(2,:)+1.2*sind(thbeta),'Color',[0 75 135]/255);
+
 
 %% 
 % Add phase B and C time-series and add a line for the x-axis
@@ -162,6 +214,10 @@ hvacl1 = plot([0 1.2]+co,[hvat1.YData(1) hvat1.YData(1)],'r:');
 hvbcl1 = plot([hvb1.X(2) hvbt1.XData(1)],[hvb1.X(2) hvbt1.XData(1)],'g:');
 hvccl1 = plot([hvc1.X(2) hvct1.XData(1)],[hvc1.X(2) hvct1.XData(1)],'b:');
 
+hvalphal1 = plot([0 1.25]+co2,[hvalphat.YData(1) hvalphat.YData(1)],'Color',[192 0 0]/255,'LineStyle',':');
+hvbetal1 = plot([hvbetat.XData(1) hvbetat.XData(1)],[0 -1.2],'Color',[0 75 135]/255,'LineStyle',':');
+
+
 %% 
 
 hat = text(1.2*cos(theta(1)),1.2*sin(theta(1)),'A','HorizontalAlignment','center');
@@ -169,8 +225,11 @@ hbt = text(1.2*cos(theta(1)-2*pi/3),1.2*sin(theta(1)-2*pi/3),'B','HorizontalAlig
 hct = text(1.2*cos(theta(1)+2*pi/3),1.2*sin(theta(1)+2*pi/3),'C','HorizontalAlignment','center');
 
 hat1 = text(co,1.2,'A','HorizontalAlignment','center');
-hbt1 = text(1.2*sin(-2*pi/3)+co,1.2*cos(-2*pi/3),'B','HorizontalAlignment','center');
-hct1 = text(1.2*sin(+2*pi/3)+co,1.2*cos(+2*pi/3),'C','HorizontalAlignment','center');
+hbt1 = text(1.2*sin(-2*pi/3)+co,1.2*cos(-2*pi/3),'C','HorizontalAlignment','center');
+hct1 = text(1.2*sin(+2*pi/3)+co,1.2*cos(+2*pi/3),'B','HorizontalAlignment','center');
+
+hat2 = text(co2,1.2,'\alpha','HorizontalAlignment','center');
+hbt2 = text(co2+1.15,-0.2,'\beta','HorizontalAlignment','center');
 
 for x = 1:nt-time_window
 
@@ -178,7 +237,10 @@ for x = 1:nt-time_window
     hva.Y = [0 sin(theta(x))];
    
     hva1.Y = [0 hva.Y(2)];
-   
+    
+    hvalpha.Y = [0 hvalphat.YData(1)];
+    hvbeta.X = [0 Vbeta(time_window+x)]+co2;
+
     hvb1.X = [0 hvb.Y(2)*sin(2*pi/3)]+co;
     hvb1.Y = [0 hvb.Y(2)*cos(2*pi/3)];
     
@@ -190,6 +252,13 @@ for x = 1:nt-time_window
     
     hvc.X = [0 cos(theta(x)+2*pi/3)];
     hvc.Y = [0 sin(theta(x)+2*pi/3)];
+
+    hs1.X = [0 cos(theta(x)+pi)]+co;
+    hs1.Y = [0 -sin(theta(x)+pi)];
+    
+    hs2.X = [0 cos(theta(x)+pi)]+co2;
+    hs2.Y = [0 -sin(theta(x)+pi)];
+    
 
     hvacl.XData = [xaxis(end) hva.X(2)];
     hvacl.YData = [hva.Y(2) hva.Y(2)];
@@ -209,19 +278,29 @@ for x = 1:nt-time_window
     hvccl.XData = [xaxis(end) hvc.X(2)];
     hvccl.YData = [hvc.Y(2) hvc.Y(2)];
     
+    hvalphal1.YData = [hvalpha.Y(2) hvalpha.Y(2)];
+    hvbetal1.XData = [hvbetat.XData(1) hvbetat.XData(1)];
+
     hvat.YData = Van((1:time_window)+x);
-    hvat1.YData = Van((1:time_window)+x);
+    hvat1.YData = flipud(Van((1:time_window)+x));
    
+    hvalphat.YData = flipud(Valpha((1:time_window)+x));
+    
     hvbt.YData = Vbn((1:time_window)+x);
     hvct.YData = Vcn((1:time_window)+x);
 
-    xyb = Rb * [xaxis1; Vbn((1:time_window)+x)'];
-    xyc = Rc * [xaxis1; Vcn((1:time_window)+x)'];
+    xyb = Rb * [xaxis1; flipud(Vbn((1:time_window)+x))'];
+    xyc = Rc * [xaxis1; flipud(Vcn((1:time_window)+x))'];
     hvbt1.XData = xyb(1,:)+co+1.2*cosd(-120);
     hvbt1.YData = xyb(2,:)+1.2*sind(-120);
 
     hvct1.XData = xyc(1,:)+co+1.2*cosd(120);
     hvct1.YData = xyc(2,:)-1.2*sind(-120);
+
+    xybeta = Rbeta * [xaxis1; flipud(Vbeta((1:time_window)+x))'];
+    hvbetat.XData = xybeta(1,:)+co2+1.2*cosd(90);
+    hvbetat.YData = xybeta(2,:)-1.2*sind(90);
+    
 
     hat.Position = 1.2*[cos(theta(x)) sin(theta(x)) 0];
     hbt.Position = 1.2*[cos(theta(x)-2*pi/3) sin(theta(x)-2*pi/3) 0];

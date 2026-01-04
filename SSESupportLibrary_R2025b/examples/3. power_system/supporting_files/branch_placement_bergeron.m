@@ -1,4 +1,4 @@
-function branch_placement_bergeron(model,data)
+function branch_placement_bergeron(model,data,freq,Ts)
 %
 % This function places the branches and connects them to the buses
 %
@@ -56,9 +56,17 @@ for ll = 1:nld
     
     mid_point = (max([ph1;ph2]) - min([ph1;ph2]))/2+min([ph1;ph2]);
 
-    h = add_block('network_components/branch_bergeron',[model,'/branch_',nf,'_',nt,'_',num2str(numDuplicates(ll))]);
+    L1 = data.branch(ll,4)*(data.tV(ll)*1e3)^2/(data.baseMVA*1e6)/(2*pi*freq);
+    C1 = data.branch(ll,5)/((data.tV(ll)*1e3)^2/(data.baseMVA*1e6))/(2*pi*freq);
+    tau = sqrt(L1*C1);
 
-    hb = find_system(h,'FindAll','on','LookUnderMasks','all','RegExp','on','Name','pos_seq_bergeron_branch');
+    if tau >= Ts % use Bergeron
+        h = add_block('network_components/branch_bergeron',[model,'/bg_',nf,'_',nt,'_',num2str(numDuplicates(ll))]);
+    else % use pi-section
+        h = add_block('network_components/branch',[model,'/pi_',nf,'_',nt,'_',num2str(numDuplicates(ll))]);
+    end
+
+    hb = find_system(h,'FindAll','on','LookUnderMasks','all','RegExp','on','Name','pos_seq_b');
 
     set(hb,'R',['lineParam.R_',nf,'_',nt,'_',num2str(numDuplicates(ll))]);
     set(hb,'X',['lineParam.X_',nf,'_',nt,'_',num2str(numDuplicates(ll))]);
@@ -93,10 +101,8 @@ for ll = 1:nld
 
     hI = find_system(h,'LookUnderMasks','all','RegExp','on','Name','IabcLine');
 
-    no1 = get(h,'Name');
-    no = strsplit(no1,'branch_');
-
-    set(hI,'GotoTag',['Iabc_',no{2}]);
+    
+    set(hI,'GotoTag',['Iabc_',nf,'_',nt,'_',num2str(numDuplicates(ll))]);
 
 
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

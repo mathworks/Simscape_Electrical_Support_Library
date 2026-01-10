@@ -73,7 +73,7 @@ for ll = 1:nld
     set(hb,'B',['lineParam.B_',nf,'_',nt,'_',num2str(numDuplicates(ll))]);
     set(hb,'Pnom_Fnom',['[',num2str(data.baseMVA*1e6),' 60]']);
     
-    if data.fV(ll) == data.tV(ll)
+    if data.fV(ll) == data.tV(ll) && data.tap(ll) == 1
 
         set(hb,'Tx','off')
 
@@ -87,15 +87,9 @@ for ll = 1:nld
     evalin('base',['lineParam.X_',nf,'_',nt,'_',num2str(numDuplicates(ll)),' = ',num2str(data.branch(ll,4)),';']);
     evalin('base',['lineParam.B_',nf,'_',nt,'_',num2str(numDuplicates(ll)),' = ',num2str(data.branch(ll,5)),';']);
     evalin('base',['lineParam.V2_',nf,'_',nt,'_',num2str(numDuplicates(ll)),' = ',num2str(data.tV(ll)*1e3),';']);
-     
-    if (data.branch(ll,9) == 0)
-        evalin('base',['lineParam.V1_',nf,'_',nt,'_',num2str(numDuplicates(ll)),' = ',num2str(data.fV(ll)*1e3),';']);
-        set(hb,'Vnom1',num2str(data.fV(ll)));
-    else
-        evalin('base',['lineParam.V1_',nf,'_',nt,'_',num2str(numDuplicates(ll)),' = ',num2str(data.fV(ll)*data.branch(ll,9)*1e3),';']);
-        set(hb,'Vnom1',num2str(data.fV(ll)*data.branch(ll,9)*1e3));
-    end
+    evalin('base',['lineParam.V1_',nf,'_',nt,'_',num2str(numDuplicates(ll)),' = ',num2str(data.fV(ll)*1e3),';']);
 
+    set(hb,'Vnom1',num2str(data.fV(ll)*1e3*data.tap(ll)));
     set(hb,'Vnom2',num2str(data.tV(ll)*1e3));
     
 

@@ -32,9 +32,9 @@ qq1 = colormap('lines');
 highlight(h,n1a,'NodeColor',qq1(1,:))
 highlight(h,n2a,'NodeColor',qq1(2,:))
  
-highlight(h,G1.Edges.EndNodes(idxa,1),G1.Edges.EndNodes(idxa,2),'EdgeColor',qq1(1,:)) % highlight region 1
-highlight(h,G1.Edges.EndNodes(idxb,1),G1.Edges.EndNodes(idxb,2),'EdgeColor',qq1(2,:)) % highlight region 2
-highlight(h,G1.Edges.EndNodes(idxB,1),G1.Edges.EndNodes(idxB,2),'EdgeColor','g') % highlight connection lines
+highlight(h,G1.Edges.EndNodes(idxa,1),G1.Edges.EndNodes(idxa,2),'EdgeColor',qq1(1,:),'LineWidth',3) % highlight region 1
+highlight(h,G1.Edges.EndNodes(idxb,1),G1.Edges.EndNodes(idxb,2),'EdgeColor',qq1(2,:),'LineWidth',3) % highlight region 2
+highlight(h,G1.Edges.EndNodes(idxB,1),G1.Edges.EndNodes(idxB,2),'EdgeColor','g','LineWidth',5) % highlight connection lines
 
 bus1 = n1a;
 bus2 = n2a;

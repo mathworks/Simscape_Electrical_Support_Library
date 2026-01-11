@@ -1,6 +1,6 @@
 # Simscape&trade; Electrical&trade; Support Library for Power Systems Engineers
 
-Version 1.0.1
+Version 1.1.0
 
 [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=mathworks/Simscape_Electrical_Support_Library)
 
@@ -45,14 +45,15 @@ the control system. There are 96 individual switches in the MMC. open a0_README.
 for further instructions. This example also considers the performance advantage 
 of using simplified diode models that fix forward voltage at 0V. 
 
-examples/3.power_system contains a power systems example that uses MATPOWER to run a load flow
-of a 30 bus system and then programmatically builds and simulates an EMT model. Navigate to the workflows
+examples/3.power_system contains power systems examplse that uses MATPOWER to run a load flow and then programmatically builds and simulates an EMT model. 30-, 57- and 118-bus examples are provided. Navigate to the workflows
 directory and open a0_README.mlx for further instructions. MATPOWER is a MATLAB Community Toolbox available at the following link https://www.mathworks.com/matlabcentral/fileexchange/72085-matpower.
 
 examples/4.switch_fidelity contains a power electronic switch model fidelity example that describes 5 different
 model fidelities for a half-bridge topology. Open model_fidelity_considerations_for_switching_devices.mlx for more information.
 
 examples/5. visualize contains models and MATLAB scripts that visualize power system and power electronic operation. Each sub-directory has MATLAB live scripts that work through the examples.
+
+examples/6. SLRT contains a 57 bus power system modeled as two segments that can be run in real-time by using Simulink Real-Time to deploy the model to Speedgoat hardware.
 
 ## Tool Requirements
 

@@ -7,7 +7,7 @@ Version 1.1.0
 ## Introduction
 
 The MathWorks Simscape Electrical Team has developed a support library for Simscape Electrical
-that provides Power Systems Engineers with an entry point to Simscape native technology.
+that provides Power Systems Engineers with a focused entry point to Simscape native technology.
 The library also contains links to relevant Simscape Electrical shipping libraries
 for ease of navigation. For each assembled component, you can view the mask code for further detail on parameterizations and use of the Simulink API to interact with Simscape components. The Support Library comes with a number of examples that are described later in this document. The library organizes different component classifications
 as 8 sub-libraries, as shown below. 
@@ -34,7 +34,7 @@ Each assembly has a parameter mask which exposes relevant parameters.
 Where applicable, there is also a check-box option to set all mask parameters
 as run-time, meaning the model will not recompile if any of the mask parameters change when using Fast Restart mode, or when the model is compiled as a MEX file.
 
-The support library comes with five sub-directories under examples. 
+The support library comes with six sub-directories under examples. 
 
 examples/1.component_tests contains test harnesses for a number of components within the 
 Support Library.

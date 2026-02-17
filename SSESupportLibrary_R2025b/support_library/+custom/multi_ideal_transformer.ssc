@@ -1,0 +1,74 @@
+component multi_ideal_transformer
+% Multi-Winding Ideal Transformer
+% Use Simscape array connectors with dimensions matched to
+% the number of windings.
+%
+% Copyright 2026, The MathWorks, Inc.
+
+parameters
+    npw = 4; % number of primary windings
+    nsw = 4; % number of secondary windings
+    nVp = {[1 1 1 1], 'V' }; % primary nominal voltages (V)
+    nVs = {[1 1 1 1], 'V' }; % secondary nominal voltages (V) 
+end
+
+parameters(Access=private)
+    nn = npw + nsw - 1;
+    qq = eye(nn);
+    ww = -eye(nn);
+    kk1 = [qq zeros(nn,1)] + [zeros(nn,1) ww];
+    VC = kk1./repmat([nVp nVs],nn,1);
+    NN = [nVp nVs];
+end
+
+variables(Access=private)
+    ip = { zeros(npw,1), 'A' };
+    vp = { zeros(npw,1), 'V' };
+    is = { zeros(nsw,1), 'A' };
+    vs = { zeros(nsw,1), 'V' };
+end
+
+
+for kp=1:npw
+
+    nodes
+        pp(kp)=foundation.electrical.electrical; %pp:left
+        np(kp)=foundation.electrical.electrical; %np:left
+    end
+
+    branches
+        ip(kp) : pp(kp).i -> np(kp).i;
+    end
+
+    equations
+        vp(kp) == pp(kp).v - np(kp).v;
+    end
+
+end
+
+for ks=1:nsw
+
+    nodes
+        ps(ks)=foundation.electrical.electrical; %ps:right
+        ns(ks)=foundation.electrical.electrical; %ns:right
+    end
+
+    branches
+        is(ks) : ps(ks).i -> ns(ks).i;
+    end
+
+    equations
+        vs(ks) == ps(ks).v - ns(ks).v;
+    end
+
+end
+
+equations
+    zeros(nn,1) == VC*[vp;vs];
+    0 == NN*[ip;is];
+end
+
+
+end
+
+

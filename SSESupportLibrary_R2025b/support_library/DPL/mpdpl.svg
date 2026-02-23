@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:d="http://www.mathworks.com/blockgraphics" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="svg_5" width="324" height="324" viewBox="0 0 324 324" d:options="Foreground:PortStyled;Background:Transparent;StrokeScaling:PortStyled;StrokeScalingOnResize:NonScaling;LineExtension:On;Rotate:On;Resize:FitToBlock;Frame:Off;Clipping:None;PreAdjustStrokeWidth:Normalized;Port:Auto Majority;">
+	<title>
+		Fig file converted by fig2lat	</title>
+	<defs>
+		<style>
+			.sB {
+				fill: none;
+			stroke: #000000;
+			stroke-width: 0.9;
+			}
+			.sA {
+				fill: none;
+			stroke: #000000;
+			stroke-width: 0.9;
+			stroke-miterlimit: 20;
+			}
+		</style>
+	</defs>
+
+	<g id="layer_5" title="layer_0" ie-ports="left:foundation-electrical-electrical,top:,right:foundation-electrical-electrical,bottom:">
+		<rect id="rect" class="rect" d:options="ClosedShapeFill:On;Port:L0;" x="0" y="0" width="324" height="324" rx="0" ry="0"/>
+		<g id="group" d:options="Port:L0;">
+			<g id="Cylinder">
+				<path id="part_1" class="sB" d:options="ClosedShapeFill:On;" d=" M 64.05,93.48 L 254.12,93.48 C 264.5,93.48 271.42,78.81 271.42,64.14 C 271.42,49.47 264.5,34.81 254.12,34.81 L 64.05,34.81"/>
+				<ellipse id="part_2" class="sB" d:options="ClosedShapeFill:On;" cx="64.04" cy="64.14" rx="17.29" ry="29.34"/>
+			</g>
+			<path id="path_6" class="sA" d=" M 22.23,64.14 L 64.03,64.14"/>
+			<path id="path_7" class="sA" d=" M 298.58,64.14 L 271.42,64.14"/>
+			<ellipse id="part_24" class="sB" d:options="ClosedShapeFill:On;" cx="64.035" cy="64.505" rx="12.425" ry="24.935"/>
+			<ellipse id="part_25" class="sB" d:options="ClosedShapeFill:On;" cx="64.94" cy="64.25" rx="5.01" ry="8.78"/>
+		</g>
+		<g id="group_31" d:options="Port:L0;">
+			<g id="Cylinder_27">
+				<path id="part" class="sB" d:options="ClosedShapeFill:On;" d=" M 64.05,289.37 L 254.12,289.37 C 264.5,289.37 271.42,274.7 271.42,260.03 C 271.42,245.36 264.5,230.7 254.12,230.7 L 64.05,230.7"/>
+				<ellipse id="part_26" class="sB" d:options="ClosedShapeFill:On;" cx="64.04" cy="260.03" rx="17.29" ry="29.34"/>
+			</g>
+			<path id="path" class="sA" d=" M 22.23,260.03 L 64.03,260.03"/>
+			<path id="path_28" class="sA" d=" M 298.58,260.03 L 271.42,260.03"/>
+			<ellipse id="part_29" class="sB" d:options="ClosedShapeFill:On;" cx="64.03" cy="260.4" rx="12.43" ry="24.93"/>
+			<ellipse id="part_30" class="sB" d:options="ClosedShapeFill:On;" cx="64.94" cy="260.14" rx="5.01" ry="8.78"/>
+		</g>
+		<g id="group_49" d:options="Port:L0;">
+			<line id="line" class="line" x1="88.15" y1="111.82" x2="88.15" y2="120.18"/>
+			<line id="line_40" class="line" x1="88.15" y1="143.88" x2="88.15" y2="152.24"/>
+			<line id="line_41" class="line" x1="88.15" y1="176.01" x2="88.15" y2="184.37"/>
+			<line id="line_42" class="line" x1="88.15" y1="208.03" x2="88.15" y2="216.39"/>
+		</g>
+		<g id="group_54" d:options="Port:L0;">
+			<line id="line_50" class="line" x1="235.7" y1="111.82" x2="235.7" y2="120.18"/>
+			<line id="line_51" class="line" x1="235.7" y1="143.88" x2="235.7" y2="152.24"/>
+			<line id="line_52" class="line" x1="235.7" y1="176.01" x2="235.7" y2="184.37"/>
+			<line id="line_53" class="line" x1="235.7" y1="208.03" x2="235.7" y2="216.39"/>
+		</g>
+	</g>
+</svg>

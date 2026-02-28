@@ -6,6 +6,14 @@ Version 1.1.0
 
 ## Introduction
 
+Simscape Electrical (formerly SimPowerSystems™) is modeling software for simulating power electronics and power systems. Simscape native technology provides a superior environment for overall modeling and simulation of power systems and power electronics, specifically in accuracy, flexibility, usability, and performance. For example: 
+* 	Run-time parameter tuning to avoid model recompilation when changing model parameters. 
+* 	Enhanced solver options that provide performance at scale for linear and switched-linear systems for both desktop and real-time simulation. 
+*	 Optimized equation construction for increased numerical robustness. 
+* 	Single-line representation of three-phase systems for faster model construction and improved model layout. 
+* 	Access to various levels of model fidelity, such as switched-linear and non-linear semiconductor switches. 
+* 	Full integration with other MathWorks tools, including Simulink Control Design, Simulink Real-Time, and Simulink Fault Analyzer for non-intrusive fault modeling, and systematic fault injection.
+
 The MathWorks Simscape Electrical Team has developed a support library for Simscape Electrical
 that provides Power Systems Engineers with a focused entry point to Simscape native technology.
 The library also contains links to relevant Simscape Electrical shipping libraries

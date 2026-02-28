@@ -1,0 +1,43 @@
+component multi_current
+% Multi-Phase Current Sensor
+% The block represents an ideal current sensor, that is, a device that
+% converts current measured in any electrical branch into a physical signal
+% proportional to the current.
+%
+% Connections + and - are conserving electrical ports through which
+% the sensor is inserted into the circuit.
+% Connection I is a physical signal port that outputs current value.
+
+% Copyright 2026 The MathWorks, Inc.
+
+parameters
+    noph = 3; % Number of phases
+end
+
+outputs
+    I = {zeros(noph,1), 'A' }; % I:right
+end
+
+variables(Access=private)
+    i1 = {zeros(noph,1), 'A' }; % Current
+end
+
+for kp=1:noph
+
+    nodes
+        p(kp) = foundation.electrical.electrical; % +:left
+        n(kp) = foundation.electrical.electrical; % -:right
+    end
+
+    branches
+        i1(kp) : p(kp).i -> n(kp).i;
+    end
+
+    equations
+        n(kp).v == p(kp).v;
+        I(kp) == i1(kp);
+    end
+
+end
+
+end

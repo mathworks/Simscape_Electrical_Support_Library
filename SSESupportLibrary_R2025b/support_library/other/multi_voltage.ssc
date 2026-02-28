@@ -1,0 +1,34 @@
+component multi_voltage
+% Multi-Phase Voltage Sensor
+% The block represents an ideal voltage sensor, that is, a device that 
+% converts voltage measured between any electrical connections into a 
+% physical signal proportional to the voltage.
+% 
+% Connections + and - are conserving electrical ports through which
+% the sensor is connected to the circuit. 
+% Connection V is a physical signal port that outputs voltage value.
+
+% Copyright 2026 The MathWorks, Inc.
+
+parameters
+    noph = 3; % Number of phases
+end
+
+outputs
+    V = { zeros(noph,1), 'V' }; % V:bottom
+end
+
+for kp=1:noph
+
+    nodes
+        p(kp) = foundation.electrical.electrical; % +:top
+        n(kp) = foundation.electrical.electrical; % -:bottom
+    end
+
+    equations
+        V(kp) == p(kp).v - n(kp).v;
+    end
+
+end
+
+end

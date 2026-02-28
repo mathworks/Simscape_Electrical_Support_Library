@@ -1,0 +1,42 @@
+component multi_coupled_RL
+% Multi-Phase Coupled RL
+% Use Simscape array connectors with dimensions matched to
+% the number of phases.
+%
+% Copyright 2026, The MathWorks, Inc.
+
+parameters
+    noph = 3; % Number of phases
+    R = {[1 0 0;0 1 0;0 0 1], 'Ohm' }; % Resistance matrix (Ohm)
+    L = {[1 0 0;0 1 0;0 0 1], 'H' }; % Inductance matrix (H) 
+end
+
+variables(Access=private)
+    i = { zeros(noph,1), 'A' };
+    v = { zeros(noph,1), 'V' };
+end
+
+for kp=1:noph
+
+    nodes
+        p(kp)=foundation.electrical.electrical; %p:left
+        n(kp)=foundation.electrical.electrical; %n:right
+    end
+
+    branches
+        i(kp) : p(kp).i -> n(kp).i;
+    end
+
+    equations
+        v(kp) == p(kp).v - n(kp).v;
+    end
+
+end
+
+equations
+    v == R*i + L*der(i);
+end
+
+end
+
+

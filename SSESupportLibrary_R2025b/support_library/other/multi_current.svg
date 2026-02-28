@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:d="http://www.mathworks.com/blockgraphics" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="svg" width="400" height="266" d:options="Foreground:PortStyled;Background:Transparent;StrokeScaling:PortStyled;StrokeScalingOnResize:NonScaling;LineExtension:On;Rotate:On;Resize:FitToBlock;Frame:Off;Clipping:None;PreAdjustStrokeWidth:Normalized;Port:Auto Majority;">
+	<defs>
+		<style>
+			.font-size-xl {
+				font-size: 85px; stroke-width: 2.13px;
+			}
+					</style>
+	</defs>
+	<g id="part_1" title="part_0" ie-ports="left:foundation-electrical-electrical,top:,right:output*foundation-electrical-electrical,bottom:">
+		<ellipse id="ellipse" class="ellipse" d:options="ClosedShapeFill:On;" cx="195.5" cy="133.83" rx="91.5" ry="85"/>
+		<ellipse id="ellipse_1" class="ellipse" d:options="ClosedShapeFill:On;" cx="196" cy="133" rx="73.5" ry="66.5"/>
+		<text id="text" class="text font-size-xl" x="184.19" y="85.66">
+			<tspan dx="0" dy="76.67" x="184.19">I</tspan>
+		</text>
+		<line id="line" class="line" x1="0" y1="133" x2="104" y2="133"/>
+		<line id="line_82" class="line" x1="329" y1="199.5" x2="400" y2="199.5"/>
+		<line id="line_116" class="line" x1="287" y1="133" x2="329" y2="133"/>
+		<line id="line_155" class="line" x1="329" y1="133" x2="329" y2="199.5"/>
+	</g>
+</svg>

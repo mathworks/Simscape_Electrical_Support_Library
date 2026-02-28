@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:d="http://www.mathworks.com/blockgraphics" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="svg" width="400" height="266" d:options="Foreground:PortStyled;Background:Transparent;PreserveAspect:On;StrokeScaling:PortStyled;StrokeScalingOnResize:NonScaling;LineExtension:On;Rotate:On;Resize:FitToBlock;Frame:Off;PreAdjustStrokeWidth:Normalized;Port:Auto Majority;">
+	<g id="part" title="part_0" ie-ports="left:foundation-electrical-electrical,top:,right:foundation-electrical-electrical,bottom:">
+		<path id="Inductor" class="path" d=" M 49,89.5 L 85.5,89.5 Q 92.8,38.5 122,38.5 Q 151.2,38.5 158.5,89.5 Q 165.8,38.5 195,38.5 Q 224.2,38.5 231.5,89.5 Q 238.8,38.5 268,38.5 Q 297.2,38.5 304.5,89.5 L 341,89.5"/>
+		<path id="Inductor_1" class="path" d=" M 49,220.5 L 85.5,220.5 Q 92.8,169.5 122,169.5 Q 151.2,169.5 158.5,220.5 Q 165.8,169.5 195,169.5 Q 224.2,169.5 231.5,220.5 Q 238.8,169.5 268,169.5 Q 297.2,169.5 304.5,220.5 L 341,220.5"/>
+		<line id="line" class="line" x1="49" y1="133" x2="341" y2="133"/>
+	</g>
+</svg>
